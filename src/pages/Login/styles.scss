@@ -1,0 +1,112 @@
+// Login page specific styles
+.login-page {
+  // Mobile-first responsive design
+  @media (max-width: 640px) {
+    .login-form {
+      padding: 1.5rem;
+      margin: 1rem;
+    }
+
+    .logo-container {
+      width: 3rem;
+      height: 3rem;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+    .title {
+      font-size: 1.875rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .login-form {
+      padding: 1rem;
+      margin: 0.5rem;
+    }
+
+    .social-buttons {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+}
+
+// Custom scrollbar for dropdowns
+.station-dropdown {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+// Focus states for accessibility
+input:focus,
+button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+// Loading animation
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+// Hover effects
+.feature-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+}
+
+// Glassmorphism effect
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+// Responsive typography
+@media (max-width: 640px) {
+  .responsive-text {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+  }
+
+  .responsive-title {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+}
