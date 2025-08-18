@@ -236,65 +236,23 @@ select:focus {
   outline-offset: 2px;
 }
 
-// Beautiful Date Picker Styles
-.rdp {
-  --rdp-cell-size: 40px;
-  --rdp-accent-color: rgba(255, 255, 255, 0.9);
-  --rdp-background-color: rgba(255, 255, 255, 0.1);
-  --rdp-accent-color-dark: rgba(255, 255, 255, 0.8);
-  --rdp-background-color-dark: rgba(255, 255, 255, 0.05);
-  --rdp-outline: 2px solid rgba(255, 255, 255, 0.3);
-  --rdp-outline-selected: 2px solid rgba(255, 255, 255, 0.8);
-  margin: 0;
-  font-family: inherit;
-}
-
-.rdp-day_selected,
-.rdp-day_selected:focus-visible,
-.rdp-day_selected:hover {
-  background: var(--rdp-accent-color) !important;
-  color: #1f2937 !important;
-  font-weight: 600;
-}
-
-.rdp-day_today {
-  background: rgba(255, 255, 255, 0.2) !important;
+// Mantine Date Picker Styles
+.mantine-DatePickerInput-input {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
   color: white !important;
-  font-weight: 600;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-size: 16px !important;
 }
 
-.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
-  background: rgba(255, 255, 255, 0.15) !important;
-  color: white !important;
+.mantine-DatePickerInput-input::placeholder {
+  color: rgba(156, 163, 175, 0.8) !important;
 }
 
-.rdp-nav_button:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
-  color: white !important;
-}
-
-.rdp-caption_label {
-  font-weight: 600;
-  color: white !important;
-}
-
-.rdp-head_cell {
-  color: rgba(156, 163, 175, 1) !important;
-  font-weight: 500;
-}
-
-.rdp-day {
-  border-radius: 8px;
-  transition: all 0.2s ease;
-}
-
-.rdp-day:hover {
-  transform: scale(1.05);
-}
-
-.rdp-day_selected {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+.mantine-DatePickerInput-input:focus {
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
 }
 
 // Loading states
