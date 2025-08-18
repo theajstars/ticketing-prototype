@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { DatePickerInput } from "@mantine/dates";
+import { useNavigate } from "react-router-dom";
 import {
   MapPin,
   Clock,
@@ -86,6 +87,7 @@ const busOptions: BusOption[] = [
 ];
 
 const StartPage: React.FC = () => {
+  const navigate = useNavigate();
   const [departureStation, setDepartureStation] = useState<Station | null>(
     null
   );
@@ -133,7 +135,11 @@ const StartPage: React.FC = () => {
 
   const handlePayment = () => {
     // Simulate payment processing
-    alert("Payment processed successfully! Redirecting to ticket...");
+
+    // Navigate to receipt page after successful payment
+    setTimeout(() => {
+      navigate("/receipt");
+    }, 1500);
   };
 
   const canContinue = departureStation && arrivalStation && selectedDate;

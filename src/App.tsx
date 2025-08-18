@@ -10,6 +10,7 @@ import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import LoginPage from "./pages/Login";
 import StartPage from "./pages/Start";
+import TransactionReceipt from "./pages/TransactionReceipt";
 import "./App.css";
 
 const theme = createTheme({
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/start" element={<StartPage />} />
+            <Route path="/receipt" element={<TransactionReceipt />} />
           </Routes>
         </div>
       </Router>

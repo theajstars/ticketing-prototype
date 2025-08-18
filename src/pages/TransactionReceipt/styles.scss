@@ -1,0 +1,234 @@
+// Transaction Receipt Styles
+.transaction-receipt {
+  // Success animation
+  .success-check {
+    animation: bounceIn 0.6s ease-out;
+  }
+
+  // QR Code styles
+  .qr-code-container {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  // Ticket card hover effects
+  .ticket-card {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  // Journey timeline
+  .journey-timeline {
+    .timeline-dot {
+      animation: pulse 2s infinite;
+    }
+  }
+
+  // Action buttons
+  .action-button {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Download button special effect
+  .download-btn {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+
+    &:hover {
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+    }
+  }
+
+  // Share button effect
+  .share-btn {
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  // Important info section
+  .important-info {
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.1),
+      rgba(37, 99, 235, 0.1)
+    );
+    border: 1px solid rgba(59, 130, 246, 0.2);
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(59, 130, 246, 0.15),
+        rgba(37, 99, 235, 0.15)
+      );
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 1024px) {
+    .grid-cols-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .text-4xl {
+      font-size: 2rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .p-6 {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .text-xl {
+      font-size: 1rem;
+    }
+
+    .space-y-6 {
+      gap: 1rem;
+    }
+  }
+}
+
+// Animation keyframes
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+// Glassmorphism effects
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+// QR Code enhancement
+.qr-code-wrapper {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4);
+    border-radius: 8px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+// Success message enhancement
+.success-message {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.1),
+    rgba(16, 185, 129, 0.1)
+  );
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+
+  .success-icon {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3);
+  }
+}
+
+// Journey information enhancement
+.journey-info {
+  .station-name {
+    font-weight: 600;
+    color: white;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #60a5fa;
+    }
+  }
+
+  .time-display {
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Payment details enhancement
+.payment-details {
+  .amount {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+  }
+
+  .transaction-id {
+    font-family: "Courier New", monospace;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
