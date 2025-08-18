@@ -68,7 +68,7 @@ const LoginPage: React.FC = () => {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl mb-4">
             <Train className="w-8 h-8 text-dark-900" />
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">RailFlow</h1>
+          <h1 className="text-3xl font-bold text-white mb-2">EVBusFlow</h1>
           <p className="text-dark-300">Welcome back to your journey</p>
         </motion.div>
 

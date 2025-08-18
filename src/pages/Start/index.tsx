@@ -10,7 +10,6 @@ import {
   ArrowRight,
   ChevronDown,
   Search,
-  Star,
 } from "lucide-react";
 import "./styles.scss";
 
@@ -21,44 +20,39 @@ interface Station {
   code: string;
 }
 
-interface TrainOption {
+interface BusOption {
   id: string;
   departureTime: string;
   arrivalTime: string;
   duration: string;
-  price: number;
+  price: number; // Price in Naira (₦)
   seats: number;
   type: "Express" | "Local" | "Premium";
 }
 
 const stations: Station[] = [
-  { id: "1", name: "Central Station", city: "New York", code: "NYS" },
-  { id: "2", name: "Grand Central Terminal", city: "New York", code: "GCT" },
-  { id: "3", name: "Penn Station", city: "New York", code: "PEN" },
-  { id: "4", name: "Union Station", city: "Washington DC", code: "WAS" },
-  { id: "5", name: "Chicago Union Station", city: "Chicago", code: "CHI" },
-  {
-    id: "6",
-    name: "Los Angeles Union Station",
-    city: "Los Angeles",
-    code: "LAX",
-  },
-  { id: "7", name: "Boston South Station", city: "Boston", code: "BOS" },
-  {
-    id: "8",
-    name: "Philadelphia 30th Street",
-    city: "Philadelphia",
-    code: "PHL",
-  },
+  { id: "1", name: "Warri Central Terminal", city: "Warri", code: "WAR" },
+  { id: "2", name: "Asaba Main Station", city: "Asaba", code: "ASA" },
+  { id: "3", name: "Sapele EV Hub", city: "Sapele", code: "SAP" },
+  { id: "4", name: "Ughelli Junction", city: "Ughelli", code: "UGH" },
+  { id: "5", name: "Agbor Central", city: "Agbor", code: "AGB" },
+  { id: "6", name: "Oghara Terminal", city: "Oghara", code: "OGH" },
+  { id: "7", name: "Kwale Station", city: "Kwale", code: "KWA" },
+  { id: "8", name: "Bomadi Hub", city: "Bomadi", code: "BOM" },
+  { id: "9", name: "Patani Central", city: "Patani", code: "PAT" },
+  { id: "10", name: "Burutu Terminal", city: "Burutu", code: "BUR" },
+  { id: "11", name: "Koko Junction", city: "Koko", code: "KOK" },
+  { id: "12", name: "Ozoro Station", city: "Ozoro", code: "OZO" },
 ];
 
-const trainOptions: TrainOption[] = [
+// Bus options with prices in Naira (₦)
+const busOptions: BusOption[] = [
   {
     id: "1",
     departureTime: "09:00",
     arrivalTime: "11:30",
     duration: "2h 30m",
-    price: 45.0,
+    price: 67500,
     seats: 156,
     type: "Express",
   },
@@ -67,7 +61,7 @@ const trainOptions: TrainOption[] = [
     departureTime: "10:15",
     arrivalTime: "13:45",
     duration: "3h 30m",
-    price: 32.5,
+    price: 48750,
     seats: 89,
     type: "Local",
   },
@@ -76,7 +70,7 @@ const trainOptions: TrainOption[] = [
     departureTime: "11:30",
     arrivalTime: "13:45",
     duration: "2h 15m",
-    price: 67.0,
+    price: 100500,
     seats: 45,
     type: "Premium",
   },
@@ -85,7 +79,7 @@ const trainOptions: TrainOption[] = [
     departureTime: "13:00",
     arrivalTime: "15:30",
     duration: "2h 30m",
-    price: 42.0,
+    price: 63000,
     seats: 203,
     type: "Express",
   },
@@ -97,12 +91,12 @@ const StartPage: React.FC = () => {
   );
   const [arrivalStation, setArrivalStation] = useState<Station | null>(null);
   const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTrain, setSelectedTrain] = useState<TrainOption | null>(null);
+  const [selectedBus, setSelectedBus] = useState<BusOption | null>(null);
   const [showDepartureDropdown, setShowDepartureDropdown] = useState(false);
   const [showArrivalDropdown, setShowArrivalDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentStep, setCurrentStep] = useState<
-    "stations" | "trains" | "payment"
+    "stations" | "buses" | "payment"
   >("stations");
 
   const filteredStations = stations.filter(
@@ -128,12 +122,12 @@ const StartPage: React.FC = () => {
 
   const handleContinue = () => {
     if (departureStation && arrivalStation && selectedDate) {
-      setCurrentStep("trains");
+      setCurrentStep("buses");
     }
   };
 
-  const handleTrainSelect = (train: TrainOption) => {
-    setSelectedTrain(train);
+  const handleBusSelect = (bus: BusOption) => {
+    setSelectedBus(bus);
     setCurrentStep("payment");
   };
 
@@ -157,7 +151,7 @@ const StartPage: React.FC = () => {
             <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
               <Train className="w-6 h-6 text-dark-900" />
             </div>
-            <h1 className="text-xl font-bold text-white">RailFlow</h1>
+            <h1 className="text-xl font-bold text-white">EVBusFlow</h1>
           </div>
 
           {/* Progress Steps */}
@@ -181,19 +175,19 @@ const StartPage: React.FC = () => {
             <ArrowRight className="w-4 h-4 text-dark-400" />
             <div
               className={`flex items-center space-x-2 ${
-                currentStep === "trains" ? "text-white" : "text-dark-400"
+                currentStep === "buses" ? "text-white" : "text-dark-400"
               }`}
             >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
-                  currentStep === "trains"
+                  currentStep === "buses"
                     ? "bg-white text-dark-900"
                     : "bg-white/20 text-white"
                 }`}
               >
                 2
               </div>
-              <span className="text-sm">Trains</span>
+              <span className="text-sm">Buses</span>
             </div>
             <ArrowRight className="w-4 h-4 text-dark-400" />
             <div
@@ -386,8 +380,8 @@ const StartPage: React.FC = () => {
           </motion.div>
         )}
 
-        {/* Step 2: Train Selection */}
-        {currentStep === "trains" && (
+        {/* Step 2: Bus Selection */}
+        {currentStep === "buses" && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -395,7 +389,7 @@ const StartPage: React.FC = () => {
           >
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-white mb-2">
-                Choose Your Train
+                Choose Your Bus
               </h2>
               <p className="text-dark-300">
                 {departureStation?.name} → {arrivalStation?.name} •{" "}
@@ -404,12 +398,12 @@ const StartPage: React.FC = () => {
             </div>
 
             <div className="space-y-4">
-              {trainOptions.map((train) => (
+              {busOptions.map((bus) => (
                 <motion.div
-                  key={train.id}
+                  key={bus.id}
                   whileHover={{ scale: 1.02 }}
                   className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6 hover:bg-white/20 transition-all duration-300 cursor-pointer"
-                  onClick={() => handleTrainSelect(train)}
+                  onClick={() => handleBusSelect(bus)}
                 >
                   <div className="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
                     <div className="flex-1">
@@ -417,42 +411,42 @@ const StartPage: React.FC = () => {
                         <div className="flex items-center space-x-2">
                           <Clock className="w-5 h-5 text-dark-400" />
                           <span className="text-white font-medium">
-                            {train.departureTime}
+                            {bus.departureTime}
                           </span>
                         </div>
                         <ArrowRight className="w-4 h-4 text-dark-400" />
                         <div className="flex items-center space-x-2">
                           <Clock className="w-5 h-5 text-dark-400" />
                           <span className="text-white font-medium">
-                            {train.arrivalTime}
+                            {bus.arrivalTime}
                           </span>
                         </div>
                       </div>
 
                       <div className="flex items-center space-x-4 text-sm text-dark-300">
-                        <span>Duration: {train.duration}</span>
+                        <span>Duration: {bus.duration}</span>
                         <span>•</span>
                         <span className="flex items-center space-x-1">
                           <Users className="w-4 h-4" />
-                          <span>{train.seats} seats available</span>
+                          <span>{bus.seats} seats available</span>
                         </span>
                       </div>
                     </div>
 
                     <div className="flex flex-col items-end space-y-2">
                       <div className="text-2xl font-bold text-white">
-                        ${train.price}
+                        ₦{bus.price.toLocaleString()}
                       </div>
                       <div
                         className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          train.type === "Premium"
+                          bus.type === "Premium"
                             ? "bg-yellow-500/20 text-yellow-400"
-                            : train.type === "Express"
+                            : bus.type === "Express"
                             ? "bg-blue-500/20 text-blue-400"
                             : "bg-green-500/20 text-green-400"
                         }`}
                       >
-                        {train.type}
+                        {bus.type}
                       </div>
                     </div>
                   </div>
@@ -470,7 +464,7 @@ const StartPage: React.FC = () => {
         )}
 
         {/* Step 3: Payment */}
-        {currentStep === "payment" && selectedTrain && (
+        {currentStep === "payment" && selectedBus && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -501,24 +495,26 @@ const StartPage: React.FC = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-dark-300">Departure:</span>
-                  <span>{selectedTrain.departureTime}</span>
+                  <span>{selectedBus.departureTime}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-dark-300">Arrival:</span>
-                  <span>{selectedTrain.arrivalTime}</span>
+                  <span>{selectedBus.arrivalTime}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-dark-300">Duration:</span>
-                  <span>{selectedTrain.duration}</span>
+                  <span>{selectedBus.duration}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-dark-300">Train Type:</span>
-                  <span>{selectedTrain.type}</span>
+                  <span className="text-dark-300">Bus Type:</span>
+                  <span>{selectedBus.type}</span>
                 </div>
                 <div className="border-t border-white/20 pt-3">
                   <div className="flex justify-between text-lg font-semibold">
                     <span>Total:</span>
-                    <span className="text-2xl">${selectedTrain.price}</span>
+                    <span className="text-2xl">
+                      ₦{selectedBus.price.toLocaleString()}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -570,14 +566,14 @@ const StartPage: React.FC = () => {
               className="w-full bg-white hover:bg-gray-100 text-dark-900 font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center space-x-2"
             >
               <CreditCard className="w-5 h-5" />
-              <span>Pay ${selectedTrain.price}</span>
+              <span>Pay ₦{selectedBus.price.toLocaleString()}</span>
             </button>
 
             <button
-              onClick={() => setCurrentStep("trains")}
+              onClick={() => setCurrentStep("buses")}
               className="w-full bg-transparent border-2 border-white text-white hover:bg-white hover:text-dark-900 font-semibold py-3 px-6 rounded-lg transition-all duration-300"
             >
-              Back to Train Selection
+              Back to Bus Selection
             </button>
           </motion.div>
         )}
