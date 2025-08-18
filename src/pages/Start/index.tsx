@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { DayPicker } from "react-day-picker";
+import { format } from "date-fns";
 import {
   MapPin,
-  Calendar,
   Clock,
   Users,
   CreditCard,
@@ -90,7 +91,7 @@ const StartPage: React.FC = () => {
     null
   );
   const [arrivalStation, setArrivalStation] = useState<Station | null>(null);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedBus, setSelectedBus] = useState<BusOption | null>(null);
   const [showDepartureDropdown, setShowDepartureDropdown] = useState(false);
   const [showArrivalDropdown, setShowArrivalDropdown] = useState(false);
@@ -357,14 +358,53 @@ const StartPage: React.FC = () => {
                 Travel Date
               </label>
               <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-dark-400" />
-                <input
-                  type="date"
-                  value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
-                  min={new Date().toISOString().split("T")[0]}
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/50"
-                />
+                <div className="bg-white/10 border border-white/20 rounded-lg p-4">
+                  <DayPicker
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={setSelectedDate}
+                    disabled={{ before: new Date() }}
+                    className="text-white"
+                    classNames={{
+                      months:
+                        "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+                      month: "space-y-4",
+                      caption:
+                        "flex justify-center pt-1 relative items-center text-white",
+                      caption_label: "text-sm font-medium text-white",
+                      nav: "space-x-1 flex items-center",
+                      nav_button:
+                        "h-7 w-7 bg-white/10 hover:bg-white/20 text-white rounded-md transition-colors",
+                      nav_button_previous: "absolute left-1",
+                      nav_button_next: "absolute right-1",
+                      table: "w-full border-collapse space-y-1",
+                      head_row: "flex",
+                      head_cell:
+                        "text-dark-300 rounded-md w-9 font-normal text-[0.8rem]",
+                      row: "flex w-full mt-2",
+                      cell: "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-white/5 [&:has([aria-selected])]:bg-white/10 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+                      day: "h-9 w-9 p-0 font-normal aria-selected:opacity-100 hover:bg-white/20 rounded-md transition-colors text-white",
+                      day_range_end: "day-range-end",
+                      day_selected:
+                        "bg-white text-dark-900 hover:bg-white/90 focus:bg-white focus:text-dark-900",
+                      day_today: "bg-white/20 text-white",
+                      day_outside:
+                        "day-outside text-dark-400 opacity-50 aria-selected:bg-white/10 aria-selected:text-dark-400 aria-selected:opacity-30",
+                      day_disabled: "text-dark-400 opacity-50",
+                      day_range_middle:
+                        "aria-selected:bg-white/10 aria-selected:text-dark-400",
+                      day_hidden: "invisible",
+                    }}
+                  />
+                </div>
+                {selectedDate && (
+                  <div className="mt-3 text-center">
+                    <span className="text-sm text-dark-300">Selected: </span>
+                    <span className="text-white font-medium">
+                      {format(selectedDate, "EEEE, MMMM do, yyyy")}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -393,7 +433,7 @@ const StartPage: React.FC = () => {
               </h2>
               <p className="text-dark-300">
                 {departureStation?.name} → {arrivalStation?.name} •{" "}
-                {selectedDate}
+                {selectedDate ? format(selectedDate, "MMM do, yyyy") : ""}
               </p>
             </div>
 
@@ -491,7 +531,9 @@ const StartPage: React.FC = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-dark-300">Date:</span>
-                  <span>{selectedDate}</span>
+                  <span>
+                    {selectedDate ? format(selectedDate, "MMM do, yyyy") : ""}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-dark-300">Departure:</span>
