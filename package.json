@@ -5,6 +5,7 @@
   "dependencies": {
     "@mantine/core": "^8.2.5",
     "@mantine/dates": "^8.2.5",
+    "@mantine/form": "^8.2.5",
     "@mantine/hooks": "^8.2.5",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-slot": "^1.2.3",
