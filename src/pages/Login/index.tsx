@@ -4,8 +4,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles.scss";
 import logo from "../../logo.svg";
-import { PasswordInput, TextInput, Checkbox } from "@mantine/core";
+import {
+  PasswordInput,
+  TextInput,
+  Checkbox,
+  TextInputProps,
+  PasswordInputProps,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { Images } from "../../lib/data";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +48,20 @@ export default function LoginPage() {
     }, 1500);
   };
 
+  const inputProps: TextInputProps & PasswordInputProps = {
+    styles: {
+      label: {
+        fontSize: 15,
+        marginBottom: 4,
+
+        marginLeft: 4,
+      },
+    },
+    size: "md",
+    required: true,
+    withAsterisk: true,
+    className: "text-white",
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-dark-950 via-dark-900 to-dark-800 flex items-center justify-center p-4">
       {/* Background Pattern */}
@@ -58,7 +79,11 @@ export default function LoginPage() {
           className="text-center mb-8"
         >
           <div className="w-full flex justify-center">
-            <img src={logo} alt="Logo" className="w-20 h-20 text-dark-900" />
+            <img
+              src={Images.Logo}
+              alt="Logo"
+              className="w-20 h-20 text-dark-900"
+            />
           </div>
 
           <h1 className="text-3xl font-bold text-white mb-2">
@@ -78,24 +103,21 @@ export default function LoginPage() {
             {/* Email Field */}
 
             <TextInput
-              id="email"
+              name="email"
               label="Email Address"
+              {...inputProps}
               placeholder="Enter your email"
               leftSection={<Mail className="h-5 w-5 text-dark-400" />}
-              withAsterisk
-              className="text-white"
               {...form.getInputProps("email")}
             />
 
             {/* Password Field */}
 
             <PasswordInput
-              id="password"
               label="Password"
+              {...inputProps}
               placeholder="Enter your password"
               leftSection={<Lock className="h-5 w-5 text-dark-400" />}
-              withAsterisk
-              className="text-white"
               {...form.getInputProps("password")}
             />
 
