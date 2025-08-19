@@ -125,6 +125,7 @@ export default function LoginPage() {
             <div className="flex items-center justify-between">
               <Checkbox
                 label="Remember me"
+                className="text-white"
                 {...form.getInputProps("rememberMe", { type: "checkbox" })}
               />
               <button
