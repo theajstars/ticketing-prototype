@@ -254,7 +254,7 @@ const TransactionReceipt: React.FC = () => {
                 />
               </div>
               <p className="text-sm text-dark-300">
-                Show this QR code to the bus driver for boarding
+                This Code will be used to generate your ticket
               </p>
             </div>
 
