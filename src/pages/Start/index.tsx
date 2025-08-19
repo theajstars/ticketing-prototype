@@ -13,6 +13,7 @@ import {
   Search,
 } from "lucide-react";
 import "./styles.scss";
+import { Images } from "../../lib/data";
 
 interface Station {
   id: string;
@@ -154,9 +155,11 @@ const StartPage: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
-              <Train className="w-6 h-6 text-dark-900" />
-            </div>
+            <img
+              src={Images.Logo}
+              alt="Logo"
+              className="w-10 h-10 text-dark-900"
+            />
             <h1 className="text-xl font-bold text-white">EVBusFlow</h1>
           </div>
 
