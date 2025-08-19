@@ -3,16 +3,21 @@ import { ArrowRight, Lock, Mail } from "lucide-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles.scss";
-import { Images } from "../../lib/data";
-import { Center, PasswordInput, TextInput } from "@mantine/core";
+import logo from "../../logo.svg";
+import { PasswordInput, TextInput, Checkbox } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const form = useForm({
+  const form = useForm<{
+    email: string;
+    password: string;
+    rememberMe: boolean;
+  }>({
     initialValues: {
       email: "",
       password: "",
+      rememberMe: false,
     },
     validate: {
       email: (value: string) =>
@@ -24,7 +29,11 @@ const LoginPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (values: { email: string; password: string }) => {
+  const handleSubmit = async (values: {
+    email: string;
+    password: string;
+    rememberMe: boolean;
+  }) => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -48,13 +57,9 @@ const LoginPage: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
         >
-          <Center w="100%">
-            <img
-              src={Images.Logo}
-              alt="Logo"
-              className="w-20 h-20 text-dark-900"
-            />
-          </Center>
+          <div className="w-full flex justify-center">
+            <img src={logo} alt="Logo" className="w-20 h-20 text-dark-900" />
+          </div>
 
           <h1 className="text-3xl font-bold text-white mb-2">
             Delta State Government of Nigeria EV Bus System Portal
@@ -98,13 +103,10 @@ const LoginPage: React.FC = () => {
 
             {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 text-white bg-white/10 border-white/20 rounded focus:ring-white/50 focus:ring-2"
-                />
-                <span className="ml-2 text-sm text-dark-300">Remember me</span>
-              </label>
+              <Checkbox
+                label="Remember me"
+                {...form.getInputProps("rememberMe", { type: "checkbox" })}
+              />
               <button
                 type="button"
                 className="text-sm text-white hover:text-gray-300 transition-colors"
