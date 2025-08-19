@@ -7,7 +7,7 @@ import logo from "../../logo.svg";
 import { PasswordInput, TextInput, Checkbox } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-const LoginPage: React.FC = () => {
+export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<{
     email: string;
@@ -76,30 +76,28 @@ const LoginPage: React.FC = () => {
         >
           <form onSubmit={form.onSubmit(handleSubmit)} className="space-y-6">
             {/* Email Field */}
-            <div>
-              <TextInput
-                id="email"
-                label="Email Address"
-                placeholder="Enter your email"
-                leftSection={<Mail className="h-5 w-5 text-dark-400" />}
-                withAsterisk
-                className="text-white"
-                {...form.getInputProps("email")}
-              />
-            </div>
+
+            <TextInput
+              id="email"
+              label="Email Address"
+              placeholder="Enter your email"
+              leftSection={<Mail className="h-5 w-5 text-dark-400" />}
+              withAsterisk
+              className="text-white"
+              {...form.getInputProps("email")}
+            />
 
             {/* Password Field */}
-            <div>
-              <PasswordInput
-                id="password"
-                label="Password"
-                placeholder="Enter your password"
-                leftSection={<Lock className="h-5 w-5 text-dark-400" />}
-                withAsterisk
-                className="text-white"
-                {...form.getInputProps("password")}
-              />
-            </div>
+
+            <PasswordInput
+              id="password"
+              label="Password"
+              placeholder="Enter your password"
+              leftSection={<Lock className="h-5 w-5 text-dark-400" />}
+              withAsterisk
+              className="text-white"
+              {...form.getInputProps("password")}
+            />
 
             {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between">
@@ -154,6 +152,4 @@ const LoginPage: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default LoginPage;
+}
